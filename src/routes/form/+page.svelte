@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { IsOInline } from '$lib';
 
 	export let data;
 
@@ -10,7 +9,6 @@
 </script>
 
 <div class="flex flex-col gap-6 border rounded-lg px-4 py-6 bg-gray-50">
-	<IsOInline />
 	<div class="flex justify-between items-center">
 		<h2 class="text-2xl font-bold mb-4">Lista de personas</h2>
 		<button

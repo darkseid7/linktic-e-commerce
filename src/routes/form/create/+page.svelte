@@ -1,58 +1,92 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+
+	import { IsOInline } from '$lib';
+	import { checkNetwork } from '../../../store';
 	import { Input, Button, Select, RadioButton } from '$lib';
 
-	let tipo_documento = [
-		'CC-Cédula de ciudadanía',
-		'CE-Cédula de extranjería',
-		'TI -Tarjeta de identidad',
-		'NUIP/Registro Civil'
-	];
-
-	let grupo_etario = [
-		'Primera Infancia (0-5 años)',
-		'Infancia (6 - 11 años)',
-		'Adolescencia (12 - 18 años)',
-		'Juventud (14 - 26 años)',
-		'Adultez (27- 59 años)',
-		'Persona Mayor (60 años o más)'
-	];
-
-	let cultura = [
-		'Negro(a), mulato(a), afrodescendiente, afrocolombiano(a)',
-		'Raizal del archipiélago de San Andrés, Providencia y Santa Catalina',
-		'Palenquero(a) de San Basilio',
-		'Gitano o Rrom',
-		'Indígena',
-		'Ningún grupo étnico'
-	];
+	import { tipo_documento, grupo_etario, cultura } from '$lib/utils';
 
 	let selectedCulture = '';
 	let selectedCultureIndex: number;
+	let selectedNativeLanguage: boolean;
+	let selectedEthnicOption: boolean;
+
 	const handleCultureChange = (event) => {
 		const selectElement = event.target;
 		selectedCulture = selectElement.value;
 		selectedCultureIndex = selectElement.selectedIndex;
 	};
 
-	let selectedEthnicOption: boolean;
 	const handelEthnicTerritory = (event) => {
 		const selectOption = event.target.value;
 		selectedEthnicOption = selectOption === 'Sí' ? true : false;
 		console.log(selectedEthnicOption);
 	};
 
-	let selectedNativeLanguage: boolean;
 	const handleNativeLanguage = (event) => {
 		const selectOption = event.target.value;
 		selectedNativeLanguage = selectOption === 'Sí' ? true : false;
 		console.log(selectedEthnicOption);
 	};
+
+	// function handleInput(event) {
+	// 	const { name, value } = event.target;
+	// 	formData[name] = value;
+	// }
+
+	// async function handleSubmit(event) {
+	// 	event.preventDefault();
+
+	// 	if ($isOnline) {
+	// 		const { error } = await supabase.from('UserForm').insert([formData]);
+
+	// 		if (error) {
+	// 			console.error('Error al enviar los datos:', error);
+	// 		} else {
+	// 			console.log('Datos enviados con éxito');
+	// 			formData = {}; // Reset form data
+	// 		}
+	// 	} else {
+	// 		saveToLocalStorage(formData);
+	// 		console.log('Sin conexión. Los datos se guardaron en el almacenamiento local.');
+	// 	}
+	// }
+
+	// function saveToLocalStorage(data: unknown) {
+	// 	let storedData = JSON.parse(localStorage.getItem('offlineData')) || [];
+	// 	storedData.push(data);
+	// 	localStorage.setItem('offlineData', JSON.stringify(storedData));
+	// }
+
+	// async function sendStoredData() {
+	// 	let storedData = JSON.parse(localStorage.getItem('offlineData')) || [];
+	// 	if (storedData.length > 0) {
+	// 		const { error } = await supabase.from('UserForm').insert(storedData);
+
+	// 		if (error) {
+	// 			console.error('Error al enviar los datos almacenados:', error);
+	// 		} else {
+	// 			console.log('Datos almacenados enviados con éxito');
+	// 			localStorage.removeItem('offlineData');
+	// 		}
+	// 	}
+	// }
+
+	$: console.log($checkNetwork);
+	onMount(() => {
+		// if ($isOnline) {
+		// 	sendStoredData();
+		// }
+	});
 </script>
 
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+	<IsOInline />
+
 	<Button text="regresar" on:click={() => goto('/form')} />
-	<h1 class="text-2xl font-bold mb-4">Formulario</h1>
+	<h1 class="text-2xl font-bold mb-4 text-center">Formulario</h1>
 
 	<form method="post" action="?/createDataForm">
 		<div class="grid grid-cols-2 gap-6">

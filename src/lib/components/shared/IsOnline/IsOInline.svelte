@@ -1,16 +1,16 @@
 <script>
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { checkNetwork } from '../../../../store';
 
-	const isOnline = writable(true); // Inicialmente suponemos que está en línea
-
+	let isOnline = true;
 	onMount(() => {
-		// Asegúrate de que el código solo se ejecuta en el cliente
 		if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
-			isOnline.set(navigator.onLine);
+			checkNetwork.subscribe((value) => {
+				isOnline = value;
+			});
 
 			const updateOnlineStatus = () => {
-				isOnline.set(navigator.onLine);
+				checkNetwork.set(navigator.onLine);
 			};
 
 			window.addEventListener('online', updateOnlineStatus);
@@ -26,8 +26,10 @@
 	});
 </script>
 
-{#if $isOnline}
-	<div class="p-4 bg-green-500 text-white text-center">online</div>
-{:else}
-	<div class="p-4 bg-red-500 text-white text-center">offline</div>
-{/if}
+<div class="m-2">
+	{#if $checkNetwork}
+		<div class="p-4 bg-green-500 text-white text-center">online</div>
+	{:else}
+		<div class="p-4 bg-red-500 text-white text-center">offline</div>
+	{/if}
+</div>
