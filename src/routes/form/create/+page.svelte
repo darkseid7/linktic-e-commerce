@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Input, Button, Select, RadioButton } from '$lib';
-	let name = '';
-	let email = '';
 
 	let tipo_documento = [
 		'CC-Cédula de ciudadanía',
@@ -52,6 +51,7 @@
 </script>
 
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+	<Button text="regresar" on:click={() => goto('/form')} />
 	<h2 class="text-2xl font-bold mb-4">Formulario</h2>
 
 	<form method="post" action="?/createDataForm">
@@ -63,8 +63,8 @@
 			<Select name="tipo_documento" label="Tipo de documento*" items={tipo_documento} required />
 			<Input name="numero_documento" label="Número de documento*" required />
 			<Input type="date" name="f_nacimiento" label="Fecha de Nacimiento*" required />
-			<Input type="date" name="f_dilig" label="Fecha de diligenciamiento" required />
-			<Input type="date" name="lugar_dilig" label="Lugar de diligenciamiento*" required />
+			<Input type="date" name="f_dilig" label="Fecha de diligenciamiento" />
+			<Input name="lugar_dilig" label="Lugar de diligenciamiento*" required />
 			<Input name="telefono_fijo" label="Teléfono fijo" />
 			<Input name="telefono_celular" label="Teléfono celular" />
 			<Input type="email" name="correo_electronico" label="Correo electrónico" />
@@ -104,7 +104,7 @@
 				required
 				on:change={handelEthnicTerritory}
 			/>
-			{#if selectedEthnicOption || selectedCultureIndex === 4}
+			{#if selectedEthnicOption && selectedCultureIndex === 4}
 				<div />
 
 				<Input name="resguardo_indigena" label="Resguardo indígena" />
