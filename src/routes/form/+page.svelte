@@ -44,6 +44,7 @@
 						<td class="flex px-4 py-2">
 							<button
 								class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mr-2"
+								on:click={() => goto(`form/${item.id}`)}
 							>
 								Ver
 							</button>

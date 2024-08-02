@@ -52,7 +52,7 @@
 
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
 	<Button text="regresar" on:click={() => goto('/form')} />
-	<h2 class="text-2xl font-bold mb-4">Formulario</h2>
+	<h1 class="text-2xl font-bold mb-4">Formulario</h1>
 
 	<form method="post" action="?/createDataForm">
 		<div class="grid grid-cols-2 gap-6">

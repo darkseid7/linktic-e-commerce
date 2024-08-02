@@ -1,3 +1,5 @@
+export let 
+
 let grupo_etario = [
 	'Primera Infancia (0-5 años)',
 	'Infancia (6 - 11 años)',
