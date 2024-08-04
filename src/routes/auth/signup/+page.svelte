@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { Input, Button } from '$lib';
 
 	export let form;
@@ -17,6 +18,7 @@
 		<Input type="password" name="password" label="Password*" required />
 	</div>
 	<div class="text-end mt-5">
+		<Button text="Regresar" on:click={() => goto('login')} />
 		<Button text="Signup" />
 	</div>
 </form>
