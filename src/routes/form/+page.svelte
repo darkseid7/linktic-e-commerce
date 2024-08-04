@@ -27,6 +27,11 @@
 			</thead>
 
 			<tbody class="bg-white divide-y divide-gray-200">
+				{#if formData?.length === 0}
+					<tr class="text-center">
+						<td class="px-4 py-2" colspan="5">No hay registros</td>
+					</tr>
+				{/if}
 				{#each formData || [] as item, idx}
 					<tr class="text-center">
 						<td class="px-4 py-2 whitespace-nowrap"
