@@ -1,9 +1,9 @@
 import { supabase } from '$lib/supabaseClient';
 import { redirect } from '@sveltejs/kit';
-
+import type { Actions } from './$types';
 export async function load() {}
 
-export const actions = {
+export const actions: Actions = {
 	createDataForm: async (event) => {
 		let id = null;
 		try {
@@ -14,6 +14,7 @@ export const actions = {
 
 			const response = await supabase.from('UserForm').insert([formDataObject]).select();
 
+			console.log(response);
 			if (response.error) {
 				throw response.error;
 			}

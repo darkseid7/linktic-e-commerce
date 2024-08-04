@@ -5,4 +5,7 @@ import Select from './components/shared/Select/Select.svelte';
 import RadioButton from './components/shared/RadioButton/RadioButton.svelte';
 import IsOInline from './components/shared/IsOnline/IsOInline.svelte';
 
-export { Input, Button, Select, RadioButton, IsOInline };
+import OnlineForm from './components/Form/OnlineForm.svelte';
+import OfflineForm from './components/Form/OfflineForm.svelte';
+
+export { Input, Button, Select, RadioButton, IsOInline, OnlineForm, OfflineForm };
