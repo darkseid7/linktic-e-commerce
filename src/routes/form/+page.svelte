@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 
 	export let data;
@@ -43,7 +44,7 @@
 							>
 								Ver
 							</button>
-							<form method="POST" action="?/deleteRow">
+							<form method="POST" action="?/deleteRow" use:enhance>
 								<input type="hidden" name="id" value={item.id} />
 
 								<button
