@@ -2,13 +2,10 @@
 	import { goto } from '$app/navigation';
 
 	export let data;
-
-	console.log(data);
-
 	$: formData = data.formRows;
 </script>
 
-<div class="flex flex-col gap-6 border rounded-lg px-4 py-6 bg-gray-50">
+<div class="">
 	<div class="flex justify-between items-center">
 		<h2 class="text-2xl font-bold mb-4">Lista de personas</h2>
 		<button

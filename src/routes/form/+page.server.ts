@@ -1,8 +1,8 @@
 import { supabase } from '$lib/supabaseClient';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ params, locals }) => {
 	let { data: UserForm, error } = await supabase.from('UserForm').select('*');
-	console.log(UserForm);
 	if (error) {
 		return console.log(error);
 	}

@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-
 	import { IsOInline } from '$lib';
-	import { checkNetwork } from '../../../store';
 	import { Input, Button, Select, RadioButton } from '$lib';
 
 	import { tipo_documento, grupo_etario, cultura } from '$lib/utils';
+	import { enhance } from '$app/forms';
 
 	let selectedCulture = '';
 	let selectedCultureIndex: number;
@@ -22,73 +20,20 @@
 	const handelEthnicTerritory = (event) => {
 		const selectOption = event.target.value;
 		selectedEthnicOption = selectOption === 'Sí' ? true : false;
-		console.log(selectedEthnicOption);
 	};
 
 	const handleNativeLanguage = (event) => {
 		const selectOption = event.target.value;
 		selectedNativeLanguage = selectOption === 'Sí' ? true : false;
-		console.log(selectedEthnicOption);
 	};
-
-	// function handleInput(event) {
-	// 	const { name, value } = event.target;
-	// 	formData[name] = value;
-	// }
-
-	// async function handleSubmit(event) {
-	// 	event.preventDefault();
-
-	// 	if ($isOnline) {
-	// 		const { error } = await supabase.from('UserForm').insert([formData]);
-
-	// 		if (error) {
-	// 			console.error('Error al enviar los datos:', error);
-	// 		} else {
-	// 			console.log('Datos enviados con éxito');
-	// 			formData = {}; // Reset form data
-	// 		}
-	// 	} else {
-	// 		saveToLocalStorage(formData);
-	// 		console.log('Sin conexión. Los datos se guardaron en el almacenamiento local.');
-	// 	}
-	// }
-
-	// function saveToLocalStorage(data: unknown) {
-	// 	let storedData = JSON.parse(localStorage.getItem('offlineData')) || [];
-	// 	storedData.push(data);
-	// 	localStorage.setItem('offlineData', JSON.stringify(storedData));
-	// }
-
-	// async function sendStoredData() {
-	// 	let storedData = JSON.parse(localStorage.getItem('offlineData')) || [];
-	// 	if (storedData.length > 0) {
-	// 		const { error } = await supabase.from('UserForm').insert(storedData);
-
-	// 		if (error) {
-	// 			console.error('Error al enviar los datos almacenados:', error);
-	// 		} else {
-	// 			console.log('Datos almacenados enviados con éxito');
-	// 			localStorage.removeItem('offlineData');
-	// 		}
-	// 	}
-	// }
-
-	$: console.log($checkNetwork);
-	onMount(() => {
-		// if ($isOnline) {
-		// 	sendStoredData();
-		// }
-	});
 </script>
 
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
 	<IsOInline />
-
 	<Button text="regresar" on:click={() => goto('/form')} />
 	<h1 class="text-2xl font-bold mb-4 text-center">Formulario</h1>
 
-	<form method="post" action="?/createDataForm">
+	<form method="post" action="?/createDataForm" use:enhance>
 		<div class="grid grid-cols-2 gap-6">
 			<Input name="primer_nombre" label="Primer Nombre*" required />
 			<Input name="segundo_nombre" label="Segundo Nombre" />
